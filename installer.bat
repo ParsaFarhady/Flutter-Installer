@@ -19,30 +19,9 @@ set "zipFile=%tempFolder%\flutter.zip"
 :: Create temporary folder
 if not exist "%tempFolder%" mkdir "%tempFolder%"
 
-:: Download Flutter zip file (tracking progress in MB)
+:: Download Flutter zip file
 echo Downloading Flutter...
 bitsadmin /transfer "FlutterDownload" /download /priority foreground "%downloadURL%" "%zipFile%"
-
-setlocal enabledelayedexpansion
-set "totalBytes=0"
-set "totalMB=0"
-
-:loop
-set "currentBytes=!totalBytes!"
-bitsadmin /info "FlutterDownload" | findstr /C:"Bytes Received" > "%tempFolder%\progress.txt"
-for /f "tokens=3" %%a in ('type "%tempFolder%\progress.txt"') do set "totalBytes=%%a"
-
-set /a "deltaBytes=totalBytes-currentBytes"
-set /a "totalMB+=deltaBytes/1048576"
-
-cls
-echo Downloading Flutter... %totalMB% MB
-ping -n 2 127.0.0.1 >nul  :: Delay for 2 seconds
-
-goto :loop
-
-:end_loop
-del "%tempFolder%\progress.txt"
 
 :: Unzip Flutter
 echo Extracting Flutter...
