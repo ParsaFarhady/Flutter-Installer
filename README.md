@@ -26,11 +26,11 @@ This script automates the installation of Flutter on Linux systems. It downloads
 2. Open a terminal and navigate to the directory where the script is located.
 3. Run the following command to make the script executable:
    ```bash
-   chmod +x install_flutter_linux.sh
+   chmod +x installer.sh
    ```
 4. Execute the script with the following command:
 ```bash
-./install_flutter_linux.sh
+./installer.sh
 ```
 Follow the on-screen instructions.
 After the installation is complete, restart your terminal.
